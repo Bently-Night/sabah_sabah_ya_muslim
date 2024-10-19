@@ -36,19 +36,19 @@
         <img src="muslim.jpeg"><br>
         <br>
         <label id="how many sabah" style="font-size: x-large;">33</label>
-    <br>
-    <br>
-    <a href="index.html">
-        <button style="background-color: blue; border: none; border-radius: 25px; cursor: pointer;">restart</button>
-    </a>
+        <br>
+        <br>
+        <a href="index.html">
+            <button style="background-color: blue; border: none; border-radius: 25px; cursor: pointer;">restart</button>
+        </a>
     </div>
-    
 
     <audio id="endSound" src="sound.mp3"></audio>
 
     <script>
         let sabahCount = 33;
-        
+        let cycle = 1; // Tracks how many cycles of 33 have been completed
+
         function sabah() {
             sabahCount--;
             document.getElementById("how many sabah").textContent = sabahCount;
@@ -57,18 +57,27 @@
                 document.getElementById("sabah").disabled = true;
                 document.getElementById("container").style.backgroundColor = "gray";
                 document.getElementById("body").style.backgroundColor = "gray";
-                document.getElementById("how many sabah").textContent = "you sabahed 33 times now restart and say subhanallah"
+
+                // Check if it's the first or second cycle of 33
+                if (cycle === 1) {
+                    document.getElementById("how many sabah").textContent = "you sabahed 33 times, now restart and say subhanallah";
+                } else if (cycle === 2) {
+                    document.getElementById("how many sabah").textContent = "you sabahed 33 times again, now restart and say istighfirallah";
+                }
 
                 if (navigator.vibrate) {
-
                     navigator.vibrate(500);
                 }
 
-      
                 playSound();
-
-
                 flashButton();
+                
+                // Reset for the next cycle
+                cycle++;
+                sabahCount = 33;
+                document.getElementById("sabah").disabled = false;
+                document.getElementById("container").style.backgroundColor = "";
+                document.getElementById("body").style.backgroundColor = "";
             }
         }
 
